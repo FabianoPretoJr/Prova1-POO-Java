@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String args[]) {
+        Scanner intInput = new Scanner(System.in);
+        Scanner doubleInput = new Scanner(System.in);
+        
+        try{
+            double divida, juros, remaining, parcelas;
+            int parcels;
+
+            System.out.print("Digite o valor da divida: ");
+            divida = doubleInput.nextDouble();
+
+            System.out.print("Digite a taxa de juros como no exemplo (Ex: 5% = 5): ");
+            juros = 1 + (doubleInput.nextDouble()/100);
+        
+            System.out.print("Digite o numero de parcelas: ");
+            parcels = intInput.nextInt();
+
+            remaining = divida;
+            parcelas = 0;
+            System.out.println("Mes | Total       | Prestacao   | Restante");
+
+            for (int i = 0; i <= parcels; i++) {
+                System.out.printf("%3d | R$ %8.2f | R$ %8.2f | R$ %8.2f\n", i, divida, parcelas, remaining);
+                divida = remaining * juros;
+                parcelas = divida / (parcels - i);
+                remaining = divida - parcelas;
+            }
+        }
+        finally{
+            intInput.close();
+            doubleInput.close();
+        }
+    }
+}
